@@ -110,13 +110,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   title: {
+    color: 'black',
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 5,
   },
   price: {
     fontSize: 14,
-    // color: 'black',
+    color: 'black',
   },
   // Add styles for other product details as needed
 });

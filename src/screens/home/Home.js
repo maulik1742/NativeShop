@@ -1,7 +1,7 @@
 // App.js
 
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Alert, BackHandler, StyleSheet, View} from 'react-native';
 import Header from '../../components/header/Header';
 import ProductList from '../../components/ProductList/ProductList';
 import {useDispatch, useSelector} from 'react-redux';
@@ -47,6 +47,25 @@ export default function App() {
     },
   ];
 
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+        {
+          text: 'Cancel',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {text: 'YES', onPress: () => BackHandler.exitApp()},
+      ]);
+      return true;
+    };
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+    return () => backHandler.remove();
+  }, []);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,10 +73,7 @@ export default function App() {
   }, []);
   const products = useSelector(state => state?.Home?.products);
 
-  console.log('products === :>> ', products);
-
   const handleChange = e => {
-    console.log('e :>> ', e);
     setsearch(e);
   };
 
