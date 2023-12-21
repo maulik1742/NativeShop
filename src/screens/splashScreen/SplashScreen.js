@@ -6,7 +6,7 @@ const dimension = Dimensions?.get('window');
 const SplashScreen = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('home');
+      navigation.navigate('authNavigation');
     }, 2500);
   }, []);
   return (

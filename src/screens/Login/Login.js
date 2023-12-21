@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -9,10 +9,14 @@ import {
   BackHandler,
   Alert,
 } from 'react-native';
+import {useDispatch} from 'react-redux';
+import {login} from '../../redux/actions/AuthActions';
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const backAction = () => {
@@ -34,8 +38,16 @@ const LoginScreen = () => {
   }, []);
 
   const handleLogin = () => {
+    const obj = {
+      username: userName,
+      password: password,
+    };
+
+    dispatch(login(JSON.stringify(obj)));
+
     // Perform login logic here
-    console.log(`Email: ${email}, Password: ${password}`);
+    console.log(`userName: ${userName}, Password: ${password}`);
+
     // You can add your login logic here (e.g., API calls, authentication)
   };
 
@@ -52,10 +64,9 @@ const LoginScreen = () => {
       <View style={styles.formContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Email"
-          onChangeText={text => setEmail(text)}
-          value={email}
-          keyboardType="email-address"
+          placeholder="UserName"
+          onChangeText={text => setUserName(text)}
+          value={userName}
           autoCapitalize="none"
         />
         <TextInput
@@ -68,6 +79,7 @@ const LoginScreen = () => {
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+        <Text style={styles.signup}>Not a user? Sign Up</Text>
       </View>
     </View>
   );
@@ -80,6 +92,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
+  },
+  signup: {
+    color: '#3498db',
+    fontWeight: 'bold',
+    textAlign: 'right',
+    marginTop: 6,
+    marginRight: 3,
   },
   logoContainer: {
     alignItems: 'center',
