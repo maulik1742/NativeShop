@@ -12,6 +12,7 @@ const Header = ({handleChange, search}) => {
         onChangeText={handleChange}
         style={styles.searchBar}
         value={search}
+        placeholderTextColor={color.gray}
         placeholder="Search..."
       />
     </View>

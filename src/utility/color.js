@@ -10,7 +10,7 @@ export const color = {
   wildSand: '#F5F5F5',
   wildSand1: '#F6F6F6',
   wildSand2: '#F4F4F4',
-  gray: '#818181',
+  gray: '#BBB7B8',
   gray1: '#7E7E7E',
   gray2: '#858585',
   grenadier: '#E03300',
